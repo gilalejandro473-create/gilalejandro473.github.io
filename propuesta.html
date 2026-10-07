@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=dive-width initial-scale=1.0"
+    <title>💕 Para ti</title>
+    <style>
+        * {margin: 0;padding: 0; box-sizing:border-box; font-family: 'Arial',sans-serif; }
+        boby {
+        min-heigth: 100vh;
+        backrou: linear-gradient (135deg, ·ffecd2 0%, ·fcb69f 100%);
+        display: flex;
+        felx-direction: column;
+        aling-items: center;
+        justify-content: center;
+        overflow: hidden;
+    } 
+.contenedor { 
+    background: white;
+            padding: 50px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            text-align: center;
+            }
+        h1 { color: #e91e63; font-size: 2.2rem; margin-bottom: 40px; }
+        .botones { display: flex; gap: 30px; justify-content: center; position: relative; }
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #btnSi {
+            background: #4caf50;
+            color: white;
+        }
+        #btnSi:hover { transform: scale(1.1); box-shadow: 0 5px 15px rgba(76,175,80,0.4); }
+        #btnNo {
+            background: #f44336;
+            color: white;
+            position: absolute;
+            transition: all 0.2s ease;
+        }
+        .corazon {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0;
+            animation: flotar 3s ease-out forwards;
+        }
+         @keyframes flotar {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-200px) scale(0.5); opacity: 0; }
+        }
+        .respuesta {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            color: #e91e63;
+            font-weight: bold;
+            display: none;
+             }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>¿Quieres ser mi novia? 💖</h1>
+        <div class="botones">
+            <button id="btnSi">Sí 💍</button>
+            <button id="btnNo">No 😢</button>
+        </div>
+        <div class="respuesta" id="mensaje">¡Sabía que dirías que SÍ! 🥰❤️✨</div>
+    </div>
+
+    <script>
+        const btnNo = document.getElementById('btnNo');
+        const btnSi = document.getElementById('btnSi');
+        const mensaje = document.getElementById('mensaje');
+        let tamano = 1;
+    // El botón "No" se escapa
+        btnNo.addEventListener('mouseover', () => {
+            const maxX = window.innerWidth - btnNo.offsetWidth - 50;
+            const maxY = window.innerHeight - btnNo.offsetHeight - 50;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            btnNo.style.left = `${x}px`;
+            btnNo.style.top = `${y}px`;
+            
+            // Cada vez que se escapa, el "Sí" crece más 😂
+            tamano += 0.15;
+            btnSi.style.transform = `scale(${tamano})`;
+        });
+ // Al darle "Sí" sale la animación de corazones
+        btnSi.addEventListener('click', () => {
+            mensaje.style.display = 'block';
+            crearCorazones();
+        });
+
+        function crearCorazones() {
+            setInterval(() => {
+                const corazon = document.createElement('span');
+                corazon.classList.add('corazon');
+                corazon.textContent = '❤️';
+                corazon.style.left = `${Math.random() * 100}%`;
+                corazon.style.top = `${Math.random() * 100}%`;
+                document.body.appendChild(corazon);
+                setTimeout(() => corazon.remove(), 3000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
